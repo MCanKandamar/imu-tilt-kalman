@@ -1,0 +1,26 @@
+
+
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+
+
+jobs:
+    tests:
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v7
+
+            - name: Configure
+              run: cmake -S . -B build/linux -G Ninja
+
+            - name: Build 
+              run: cmake --build build/linux
+
+            - name: Test
+              run: ctest --test-dir build/linux --output-on-failure
+
+
