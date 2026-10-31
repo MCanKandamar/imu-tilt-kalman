@@ -8,7 +8,7 @@ Done to the newest items (git keeps history); shorten Next to one line per item;
 ## Now
 Task: Build imu-tilt-kalman · branch: `main` for M1-M3, then one `feature/<name>` per step · started: 2026-10-31 on Ubuntu
 The user writes the code. Each step ends with its check. Thresholds marked "target" are first guesses, to be set from data.
-The GitHub repository exists and is public. M1 still needs the first push, GitHub Actions and the CI check.
+The GitHub repository exists and is public. M1 still needs GitHub Actions and the CI check.
 
 - [ ] M1 (in progress) Repo and green CI: `.gitignore`, `.gitattributes` (LF line endings), LICENSE, CMake with a separate build folder per OS (`build/windows`, `build/linux`), one GoogleTest test, GitHub Actions. Check: a pushed commit shows a green CI run; a deliberately failing test turns it red.
 - [ ] M2 `Matrix<R, C>`: fixed-size class template with add, multiply and transpose. Check: unit tests pass in CI; no heap use.
@@ -20,14 +20,14 @@ The GitHub repository exists and is public. M1 still needs the first push, GitHu
 - [ ] M8 Portfolio finish: README with plots, CI badge, tagged release.
 
 ## Next
-1. First push to `main`, then add Actions and finish M1's CI check.
-2. Run the CMake build and tests on Windows (`build/windows`): not run yet.
-3. Answer Open questions 1 and 2 before M5.
+1. Add the Ubuntu signing key to GitHub as a Signing Key: the GitHub API lists only the Windows key, so the 7 Ubuntu-signed commits report `unknown_key`. Check afterwards whether they become Verified.
+2. Add Actions and finish M1's CI check.
+3. Run the CMake build and tests on Windows (`build/windows`): not run yet.
+4. Answer Open questions 1 and 2 before M5.
 
 ## Done
-- GitHub repository and Ubuntu access: `origin` added. Evidence: `verified: git ls-remote origin ✓`; `ssh -T git@github.com` greeting reported by the owner.
+- GitHub repository, Ubuntu access and first push. Evidence: `verified: git fetch origin ✓`, `main` equals `origin/main` at 850afd3; `ssh -T git@github.com` greeting reported by the owner.
 - M1 local parts on Ubuntu: `.gitattributes`, `.gitignore`, LICENSE, CMake, one GoogleTest test, CTest. Evidence: `verified: ctest --test-dir build/linux --output-on-failure ✓`; a deliberately wrong expected value gave exit code 8 (reported by the owner). Windows and CI: not run.
-- Ubuntu signing key added to GitHub as a Signing Key. Evidence: reported by the owner; "Verified" badge unverified (no remote yet).
 - Ubuntu setup: same C: folder, `~/.agents` links, Git identity, own signing key. Evidence: `verified: git verify-commit ✓`; old commit also verifies. Docker on the mount: not run (Docker not installed).
 
 ## Dead ends
