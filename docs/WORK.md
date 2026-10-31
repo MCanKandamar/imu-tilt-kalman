@@ -20,12 +20,12 @@ The GitHub repository exists and is public. M1 still needs GitHub Actions and th
 - [ ] M8 Portfolio finish: README with plots, CI badge, tagged release.
 
 ## Next
-1. Add the Ubuntu signing key to GitHub as a Signing Key: the GitHub API lists only the Windows key, so the 7 Ubuntu-signed commits report `unknown_key`. Check afterwards whether they become Verified.
-2. Add Actions and finish M1's CI check.
-3. Run the CMake build and tests on Windows (`build/windows`): not run yet.
-4. Answer Open questions 1 and 2 before M5.
+1. Add Actions and finish M1's CI check.
+2. Run the CMake build and tests on Windows (`build/windows`): not run yet.
+3. Answer Open questions 1 and 2 before M5.
 
 ## Done
+- Ubuntu signing key added to GitHub as a Signing Key. Evidence: GitHub API lists both signing keys and reports all 10 pushed commits as `valid`.
 - GitHub repository, Ubuntu access and first push. Evidence: `verified: git fetch origin ✓`, `main` equals `origin/main` at 850afd3; `ssh -T git@github.com` greeting reported by the owner.
 - M1 local parts on Ubuntu: `.gitattributes`, `.gitignore`, LICENSE, CMake, one GoogleTest test, CTest. Evidence: `verified: ctest --test-dir build/linux --output-on-failure ✓`; a deliberately wrong expected value gave exit code 8 (reported by the owner). Windows and CI: not run.
 - Ubuntu setup: same C: folder, `~/.agents` links, Git identity, own signing key. Evidence: `verified: git verify-commit ✓`; old commit also verifies. Docker on the mount: not run (Docker not installed).
