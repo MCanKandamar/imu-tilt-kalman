@@ -6,10 +6,11 @@ Dead ends to PROJECT.md › Decisions & constraints (as "Constraint:"); drop obs
 Done to the newest items (git keeps history); shorten Next to one line per item; remove answered questions. -->
 
 ## Now
-Task: Build imu-tilt-kalman · branch: `main` for M1-M3, then one `feature/<name>` per step · started: not yet
+Task: Build imu-tilt-kalman · branch: `main` for M1-M3, then one `feature/<name>` per step · started: 2026-10-31 on Ubuntu
 The user writes the code. Each step ends with its check. Thresholds marked "target" are first guesses, to be set from data.
+Local git only for now: the owner will say when the GitHub repository exists. Until then M1's local parts proceed; GitHub Actions, the push and the CI check wait.
 
-- [ ] M1 Repo and green CI: `.gitignore`, `.gitattributes` (LF line endings), LICENSE, CMake with a separate build folder per OS (`build/windows`, `build/linux`), one GoogleTest test, GitHub Actions. Check: a pushed commit shows a green CI run; a deliberately failing test turns it red.
+- [ ] M1 (in progress) Repo and green CI: `.gitignore`, `.gitattributes` (LF line endings), LICENSE, CMake with a separate build folder per OS (`build/windows`, `build/linux`), one GoogleTest test, GitHub Actions. Check: a pushed commit shows a green CI run; a deliberately failing test turns it red.
 - [ ] M2 `Matrix<R, C>`: fixed-size class template with add, multiply and transpose. Check: unit tests pass in CI; no heap use.
 - [ ] M3 Simulator and filter: first a one-state filter (angle), then two states (angle, gyro bias); plot with Python. Check: on simulated data with a known gyro bias, the filter estimates the bias and beats gyro-only and accel-only angles (target: RMS error under 1°).
 - [ ] M4 Docker: one image with CMake, GCC and `arm-none-eabi-gcc`, with pinned versions; CI runs inside it. Check: the same tests pass locally in the container and in CI.
@@ -19,11 +20,12 @@ The user writes the code. Each step ends with its check. Thresholds marked "targ
 - [ ] M8 Portfolio finish: README with plots, CI badge, tagged release; make the repository public after approval.
 
 ## Next
-1. Owner: add the Ubuntu public signing key to GitHub as a Signing Key.
-2. Start M1, on Windows or Ubuntu. On Ubuntu, pushing also needs GitHub access (none set up yet).
+1. M1 local parts on Ubuntu: `.gitattributes`, `.gitignore`, LICENSE, CMake, one GoogleTest test.
+2. When the owner opens the GitHub repository: set up Ubuntu GitHub access (no remote or authentication key yet), then add Actions and finish M1's CI check.
 3. Answer Open questions 1 and 2 before M5.
 
 ## Done
+- Ubuntu signing key added to GitHub as a Signing Key. Evidence: reported by the owner; "Verified" badge unverified (no remote yet).
 - Ubuntu setup: same C: folder, `~/.agents` links, Git identity, own signing key. Evidence: `verified: git verify-commit ✓`; old commit also verifies. Docker on the mount: not run (Docker not installed).
 
 ## Dead ends
