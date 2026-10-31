@@ -6,7 +6,10 @@
 Profiles: code, embedded, learning
 
 ## Commands
-No build, test or lint commands exist yet. Add each one here when its roadmap step creates it.
+Run from the project folder. Add each new command here when its roadmap step creates it.
+- Configure (Ubuntu): `cmake -S . -B build/linux -G Ninja`
+- Build (Ubuntu): `cmake --build build/linux`
+- Run the smoke test (Ubuntu): `./build/linux/smoke_test`
 
 <!-- agent-lite:protocol v5.1 -->
 ## Working protocol

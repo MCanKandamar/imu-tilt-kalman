@@ -16,6 +16,7 @@ Planned layout; update it when each step creates the real files.
 
 | Path | Purpose |
 |---|---|
+| `CMakeLists.txt` | Host build: C++17 and warning flags; one `build/<os>` folder per OS |
 | `core/` | Filter and `Matrix<R, C>`; portable, no HAL, no heap |
 | `sim/` | Sensor simulator with a known true angle |
 | `tests/` | Unit, simulation and replay tests |

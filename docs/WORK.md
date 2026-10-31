@@ -20,7 +20,7 @@ Local git only for now: the owner will say when the GitHub repository exists. Un
 - [ ] M8 Portfolio finish: README with plots, CI badge, tagged release; make the repository public after approval.
 
 ## Next
-1. M1 local parts on Ubuntu: CMake and one GoogleTest test. (`.gitattributes`, `.gitignore` and LICENSE are done.)
+1. M1 local parts on Ubuntu: add GoogleTest v1.18.0 through FetchContent and one test. (`.gitattributes`, `.gitignore`, LICENSE and the CMake build of `tests/smoke_test.cpp` are done. Windows build not run yet.)
 2. When the owner opens the GitHub repository: set up Ubuntu GitHub access (no remote or authentication key yet), then add Actions and finish M1's CI check.
 3. Answer Open questions 1 and 2 before M5.
 
