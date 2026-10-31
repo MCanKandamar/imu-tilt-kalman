@@ -1,14 +1,9 @@
 
 
-#include <iostream>
+#include <gtest/gtest.h>
 
-
-int main()
+TEST(Toolchain, UsesCpp17)
 {
-
-    std::cout << "__cplusplus = " << __cplusplus << "\n";
-
-    return 0;
-
+    EXPECT_EQ(__cplusplus, 201703L);
 }
 
