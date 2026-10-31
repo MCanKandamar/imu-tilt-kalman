@@ -30,13 +30,15 @@ Dependency rule: `firmware/`, `sim/` and `tests/` use `core/`; `core/` depends o
 ## Environment
 - Development OS: Windows 11 and Ubuntu (dual boot); the owner may switch at any time. Docker work runs on Ubuntu.
 - Before switching OS: update `docs/WORK.md` and commit. With a separate clone on each OS, push as well.
-- Repository path on Windows: `C:\Users\msmca\projects\imu-tilt-kalman`. The path on Ubuntu is an open question in `docs/WORK.md`.
+- Repository path on Windows: `C:\Users\msmca\projects\imu-tilt-kalman`. Ubuntu uses the same folder at `/run/media/m-can-kandamar/01D92B870CC337C0/Users/msmca/projects/imu-tilt-kalman` (`ntfs3`, read-write). Docker on this mount is untested. If it causes trouble, clone to `~/projects/imu-tilt-kalman` and push before each OS switch.
+- Ubuntu tools found on 2026-10-31: `g++` 15.2, `cmake` 4.2.3, `ninja` 1.13.2, `arm-none-eabi-gcc` 14.2.1, Python 3.14.4. Not found: Docker, `gh`.
+- Ubuntu links `~/.agents/USER.md` and `~/.agents/profiles` to the Windows copy on C:. Ubuntu has its own signing key, `~/.ssh/id_ed25519_signing`; both systems share `C:\Users\msmca\.ssh\allowed_signers`.
 - Remote: GitHub, not created yet; it starts private.
 - Shared NTFS data disk: `E:`.
 - Windows tools found on 2026-10-31: `g++` 16.2 (MinGW-w64), `cmake` 4.4.3, `ninja`, `gh`, `python`, STM32CubeIDE 2.2.0. Not found: Docker, WSL, `arm-none-eabi-gcc` on PATH. C: has 22.6 GB free.
-- Windows disks can be mounted by Ubuntu: `powercfg /a` reports hibernation and Fast Startup unavailable, `hiberfil.sys` does not exist, and BitLocker reads as off for C: and E:. The registry value `HiberbootEnabled = 1` has no effect while hibernation is disabled. Not tested from Ubuntu yet.
+- Windows disks can be mounted by Ubuntu: `powercfg /a` reports hibernation and Fast Startup unavailable, `hiberfil.sys` does not exist, and BitLocker reads as off for C: and E:. The registry value `HiberbootEnabled = 1` has no effect while hibernation is disabled. Confirmed for C: from Ubuntu on 2026-10-31.
 - This repository was created on Windows, so `core.filemode=false`: git does not see executable-bit changes in this copy. Use `git update-index --chmod=+x <file>` for scripts.
-- Windows keeps the hardware clock in local time; Ubuntu usually assumes UTC. Check with `timedatectl` on Ubuntu, because a 3-hour shift would give commits wrong dates.
+- Windows keeps the hardware clock in local time. Ubuntu is set to match (`RTC in local TZ: yes`), and its clock was correct and synchronized on 2026-10-31.
 
 ## Hardware & toolchain
 - Target: STM32WLE5JCI6 (Cortex-M4, UFBGA73) on a custom board; board model not recorded. No FPU: `__FPU_PRESENT` is 0 in `stm32wle5xx.h:142`.

@@ -19,16 +19,15 @@ The user writes the code. Each step ends with its check. Thresholds marked "targ
 - [ ] M8 Portfolio finish: README with plots, CI badge, tagged release; make the repository public after approval.
 
 ## Next
-1. Start M1, on Windows or Ubuntu.
-2. On the first Ubuntu session: answer Open questions 3 and 4.
+1. Owner: add the Ubuntu public signing key to GitHub as a Signing Key.
+2. Start M1, on Windows or Ubuntu. On Ubuntu, pushing also needs GitHub access (none set up yet).
 3. Answer Open questions 1 and 2 before M5.
 
 ## Done
+- Ubuntu setup: same C: folder, `~/.agents` links, Git identity, own signing key. Evidence: `verified: git verify-commit ✓`; old commit also verifies. Docker on the mount: not run (Docker not installed).
 
 ## Dead ends
 
 ## Open questions
 1. What is the UART link to the PC? · Blocks M5 · The owner remembers a USB port on the custom board, but the STM32WLE5 has no USB peripheral, so it could be a USB-UART bridge or power only. Check: connect the board to Windows and see whether a new COM port appears. If it does not, use a USB-UART adapter on free USART pins.
 2. Which free pins can UART use on this board? · Blocks M5 · Needs the schematic or the board's connector list. Default meanwhile: none chosen.
-3. Does the shared C: folder work from Ubuntu? · Blocks work on Ubuntu · Default, the owner's choice: use this C: folder if Ubuntu mounts it read-write. If file permissions, line endings or Docker cause trouble, clone from GitHub to `~/projects/imu-tilt-kalman` on the Ubuntu disk and push before each OS switch.
-4. How does Ubuntu share `~/.agents`? · Blocks agent preferences on Ubuntu · Default: link `~/.agents/USER.md` and `~/.agents/profiles` to the Windows copy, so changes apply on both. This depends on C: being mounted. Ubuntu also needs its own signing key, added to GitHub and to `allowed_signers` on both systems.
