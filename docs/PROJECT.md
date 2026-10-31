@@ -28,23 +28,27 @@ Planned layout; update it when each step creates the real files.
 Dependency rule: `firmware/`, `sim/` and `tests/` use `core/`; `core/` depends on none of them.
 
 ## Environment
-- Main development OS: Ubuntu (dual boot). Windows 11 is used for planning and may be used for STM32CubeIDE.
+- Development OS: Windows 11 and Ubuntu (dual boot); the owner may switch at any time. Docker work runs on Ubuntu.
+- Before switching OS: update `docs/WORK.md` and commit. With a separate clone on each OS, push as well.
 - Repository path on Windows: `C:\Users\msmca\projects\imu-tilt-kalman`. The path on Ubuntu is an open question in `docs/WORK.md`.
-- Sync between the two systems: GitHub. Remote not created yet; it starts private.
+- Remote: GitHub, not created yet; it starts private.
 - Shared NTFS data disk: `E:`.
-- Windows Fast Startup was on when checked on 2026-10-31 (`HiberbootEnabled = 1`). Use Restart, not Shut down, before booting Ubuntu, or Ubuntu may mount NTFS disks read-only or not at all.
-- Windows `~/.agents/USER.md` names PowerShell and a Windows signing-key path, so Ubuntu cannot use that file unchanged.
+- Windows tools found on 2026-10-31: `g++` 16.2 (MinGW-w64), `cmake` 4.4.3, `ninja`, `gh`, `python`, STM32CubeIDE 2.2.0. Not found: Docker, WSL, `arm-none-eabi-gcc` on PATH. C: has 22.6 GB free.
+- Windows disks can be mounted by Ubuntu: `powercfg /a` reports hibernation and Fast Startup unavailable, `hiberfil.sys` does not exist, and BitLocker reads as off for C: and E:. The registry value `HiberbootEnabled = 1` has no effect while hibernation is disabled. Not tested from Ubuntu yet.
+- This repository was created on Windows, so `core.filemode=false`: git does not see executable-bit changes in this copy. Use `git update-index --chmod=+x <file>` for scripts.
+- Windows keeps the hardware clock in local time; Ubuntu usually assumes UTC. Check with `timedatectl` on Ubuntu, because a 3-hour shift would give commits wrong dates.
 
 ## Hardware & toolchain
 - Target: STM32WLE5JCI6 (Cortex-M4, UFBGA73) on a custom board; board model not recorded. No FPU: `__FPU_PRESENT` is 0 in `stm32wle5xx.h:142`.
 - Sensor: LSM6DSL on the board, I2C address `0xD6` (8-bit form).
 - Toolchain & build: `arm-none-eabi-gcc`, flags `-mcpu=cortex-m4 -mthumb -mfloat-abi=soft`. STM32CubeIDE was used in the earlier project; the CMake build is created in the firmware step.
 - Code generator: STM32CubeMX; the new firmware project does not exist yet.
-- Pins, clocks, peripherals: earlier project used I2C2 with SDA = PA15, SCL = PB15, and SWD on PA13/PA14. Clock was MSI 4 MHz. No UART was configured. The device header defines USART1, USART2 and LPUART1, and no USB peripheral.
-- RTOS & memory budget: no RTOS. Flash 256 KB, RAM 64 KB + RAM2 32 KB (`STM32WLE5JCIX_FLASH.ld:47-49`).
+- Pins, clocks, peripherals: earlier project used I2C2 with SDA = PA15, SCL = PB15, and SWD on PA13/PA14. Clock was MSI 4 MHz at voltage Scale 2, which allows at most 16 MHz (`stm32wlxx_hal_pwr_ex.h:165`); 48 MHz, the maximum (`stm32wlxx_hal_rcc.c:192`), needs Scale 1 and a matching flash latency. No UART was configured. The device header defines USART1, USART2 and LPUART1, and no USB peripheral.
+- RTOS & memory budget: no RTOS. Flash 256 KB, RAM 64 KB in total: SRAM1 32 KB + SRAM2 32 KB (`stm32wle5xx.h:772-773`). The earlier linker script's `RAM2` region has no sections placed in it, so do not count it as extra memory.
 - Debug & flashing setup: ST-Link. Flashing needs the user's approval every time.
 
 ## Decisions & constraints
+- 2026-10-31 · Decision: start with one working copy on C:, shared by both systems, and clone to the Ubuntu disk only if it causes trouble · Why: the owner's choice; no technical blocker was found on the Windows side.
 - 2026-10-31 · Decision: use the board and LSM6DSL from the earlier project · Why: the owner already has them and knows the I2C setup.
 - 2026-10-31 · Decision: sample at 104 Hz · Why: the earlier 26 Hz is low for tilt estimation, and 104 Hz leaves a 9.6 ms budget per sample.
 - 2026-10-31 · Constraint: no hardware FPU · Learned from: `stm32wle5xx.h:142`. Use `float` and measure the filter's cycles with the DWT counter. A rough, unmeasured estimate of 15,000 cycles per step would take about 40% of the budget at 4 MHz and 3% at 48 MHz.
