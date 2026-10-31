@@ -48,6 +48,7 @@ Dependency rule: `firmware/`, `sim/` and `tests/` use `core/`; `core/` depends o
 - Debug & flashing setup: ST-Link. Flashing needs the user's approval every time.
 
 ## Decisions & constraints
+- 2026-10-31 · Decision: use GoogleTest v1.18.0 for PC tests only, pinned through CMake FetchContent, and never link it into firmware · Why: most-used C++ framework in JetBrains' State of C++ 2025 (31%; Catch2 7%, doctest 4%), also used by PX4 and ArduPilot, and it fits this project's C++17. Approved by the owner.
 - 2026-10-31 · Decision: start with one working copy on C:, shared by both systems, and clone to the Ubuntu disk only if it causes trouble · Why: the owner's choice; no technical blocker was found on the Windows side.
 - 2026-10-31 · Decision: use the board and LSM6DSL from the earlier project · Why: the owner already has them and knows the I2C setup.
 - 2026-10-31 · Decision: sample at 104 Hz · Why: the earlier 26 Hz is low for tilt estimation, and 104 Hz leaves a 9.6 ms budget per sample.

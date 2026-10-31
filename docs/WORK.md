@@ -9,7 +9,7 @@ Done to the newest items (git keeps history); shorten Next to one line per item;
 Task: Build imu-tilt-kalman · branch: `main` for M1-M3, then one `feature/<name>` per step · started: not yet
 The user writes the code. Each step ends with its check. Thresholds marked "target" are first guesses, to be set from data.
 
-- [ ] M1 Repo and green CI: `.gitignore`, `.gitattributes` (LF line endings), LICENSE, CMake with a separate build folder per OS (`build/windows`, `build/linux`), one test, GitHub Actions. Check: a pushed commit shows a green CI run; a deliberately failing test turns it red.
+- [ ] M1 Repo and green CI: `.gitignore`, `.gitattributes` (LF line endings), LICENSE, CMake with a separate build folder per OS (`build/windows`, `build/linux`), one GoogleTest test, GitHub Actions. Check: a pushed commit shows a green CI run; a deliberately failing test turns it red.
 - [ ] M2 `Matrix<R, C>`: fixed-size class template with add, multiply and transpose. Check: unit tests pass in CI; no heap use.
 - [ ] M3 Simulator and filter: first a one-state filter (angle), then two states (angle, gyro bias); plot with Python. Check: on simulated data with a known gyro bias, the filter estimates the bias and beats gyro-only and accel-only angles (target: RMS error under 1°).
 - [ ] M4 Docker: one image with CMake, GCC and `arm-none-eabi-gcc`, with pinned versions; CI runs inside it. Check: the same tests pass locally in the container and in CI.
@@ -19,7 +19,7 @@ The user writes the code. Each step ends with its check. Thresholds marked "targ
 - [ ] M8 Portfolio finish: README with plots, CI badge, tagged release; make the repository public after approval.
 
 ## Next
-1. Start M1, on Windows or Ubuntu. Answer Open question 5 first.
+1. Start M1, on Windows or Ubuntu.
 2. On the first Ubuntu session: answer Open questions 3 and 4.
 3. Answer Open questions 1 and 2 before M5.
 
@@ -32,4 +32,3 @@ The user writes the code. Each step ends with its check. Thresholds marked "targ
 2. Which free pins can UART use on this board? · Blocks M5 · Needs the schematic or the board's connector list. Default meanwhile: none chosen.
 3. Does the shared C: folder work from Ubuntu? · Blocks work on Ubuntu · Default, the owner's choice: use this C: folder if Ubuntu mounts it read-write. If file permissions, line endings or Docker cause trouble, clone from GitHub to `~/projects/imu-tilt-kalman` on the Ubuntu disk and push before each OS switch.
 4. How does Ubuntu share `~/.agents`? · Blocks agent preferences on Ubuntu · Default: link `~/.agents/USER.md` and `~/.agents/profiles` to the Windows copy, so changes apply on both. This depends on C: being mounted. Ubuntu also needs its own signing key, added to GitHub and to `allowed_signers` on both systems.
-5. Which test framework for M1? · Adding a dependency needs approval · Default: GoogleTest.
