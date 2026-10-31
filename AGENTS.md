@@ -9,7 +9,7 @@ Profiles: code, embedded, learning
 Run from the project folder. Add each new command here when its roadmap step creates it.
 - Configure (Ubuntu): `cmake -S . -B build/linux -G Ninja`
 - Build (Ubuntu): `cmake --build build/linux`
-- Run the smoke test (Ubuntu): `./build/linux/smoke_test`
+- Test (Ubuntu): `ctest --test-dir build/linux --output-on-failure`
 
 <!-- agent-lite:protocol v5.1 -->
 ## Working protocol

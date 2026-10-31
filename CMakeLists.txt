@@ -23,3 +23,6 @@ target_compile_options(smoke_test PRIVATE -Wall -Wextra -Wpedantic)
 target_link_libraries(smoke_test PRIVATE GTest::gtest_main)
 
 
+enable_testing()
+add_test(NAME smoke_test COMMAND smoke_test)
+

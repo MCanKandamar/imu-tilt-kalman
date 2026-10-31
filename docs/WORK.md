@@ -20,11 +20,12 @@ Local git only for now: the owner will say when the GitHub repository exists. Un
 - [ ] M8 Portfolio finish: README with plots, CI badge, tagged release; make the repository public after approval.
 
 ## Next
-1. M1 local parts on Ubuntu: see the test fail on purpose, then add CTest. (`.gitattributes`, `.gitignore`, LICENSE, the CMake build and one passing GoogleTest test are done. Windows build not run yet.)
-2. When the owner opens the GitHub repository: set up Ubuntu GitHub access (no remote or authentication key yet), then add Actions and finish M1's CI check.
+1. When the owner opens the GitHub repository: set up Ubuntu GitHub access (no remote or authentication key yet), then add Actions and finish M1's CI check.
+2. Run the CMake build and tests on Windows (`build/windows`): not run yet.
 3. Answer Open questions 1 and 2 before M5.
 
 ## Done
+- M1 local parts on Ubuntu: `.gitattributes`, `.gitignore`, LICENSE, CMake, one GoogleTest test, CTest. Evidence: `verified: ctest --test-dir build/linux --output-on-failure ✓`; a deliberately wrong expected value gave exit code 8 (reported by the owner). Windows and CI: not run.
 - Ubuntu signing key added to GitHub as a Signing Key. Evidence: reported by the owner; "Verified" badge unverified (no remote yet).
 - Ubuntu setup: same C: folder, `~/.agents` links, Git identity, own signing key. Evidence: `verified: git verify-commit ✓`; old commit also verifies. Docker on the mount: not run (Docker not installed).
 
